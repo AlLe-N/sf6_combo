@@ -1,0 +1,50 @@
+{% extends "app/base.html" %} {% block content %}
+
+
+
+
+<div class="character-content">
+  <h2 class="character-content-title">Goukiのコンボ一覧</h2>
+  <hr />
+    {% for post in posts %}
+    <article>
+      <h2 class="subtitle">{{post.title}}</h2>
+      <small>Posted at {{post.posted_date}}</small>
+      <p>{{post.intro}}</p>
+      <a href="{% url 'post_detail' post.slug %}">詳しく見る</a>
+      <hr />
+    </article>
+    {% endfor %}
+</div>
+
+<div id="character-select">
+  <h2>CHARACTER SELECT</h2>
+  <ul class="character-list">
+    <a href="{% url 'Ryu' %}"><li><img src="../../static/app/images/iconA01.png" alt="RYU"></li></a>
+    <a href="{% url 'Luke' %}"><li><img src="../../static/app/images/iconA02.png" alt="LUKE"></li></a>
+    <a href="{% url 'Jamie' %}"><li><img src="../../static/app/images/iconA03.png" alt="JAMIE"></li></a>
+    <a href="{% url 'Chunli' %}"><li><img src="../../static/app/images/iconA04.png" alt="CHUN-LI"></li></a>
+    <a href="{% url 'Guile' %}"><li><img src="../../static/app/images/iconA05.png" alt="GUILE"></li></a>
+    <a href="{% url 'Kimbery' %}"><li><img src="../../static/app/images/iconA06.png" alt="KIMBERY"></li></a>
+    <a href="{% url 'Juri' %}"><li><img src="../../static/app/images/iconA07.png" alt="JURI"></li></a>
+    <a href="{% url 'Ken' %}"><li><img src="../../static/app/images/iconA08.png" alt="KEN"></li></a>
+    <a href="{% url 'Blanka' %}"><li><img src="../../static/app/images/iconA09.png" alt="BLANKA"></li></a>
+    <a href="{% url 'Dhalsim' %}"><li><img src="../../static/app/images/iconA10.png" alt="DHALSIM"></li></a>
+    <a href="{% url 'Honda' %}"><li><img src="../../static/app/images/iconA11.png" alt="E.HONDA"></li></a>
+    <a href="{% url 'Dj' %}"><li><img src="../../static/app/images/iconA12.png" alt="DJ"></li></a>
+    <a href="{% url 'Manon' %}"><li><img src="../../static/app/images/iconA13.png" alt="MANON"></li></a>
+    <a href="{% url 'Marisa' %}"><li><img src="../../static/app/images/iconA14.png" alt="MARISA"></li></a>
+    <a href="{% url 'Jp' %}"><li><img src="../../static/app/images/iconA15.png" alt="JP"></li></a>
+    <a href="{% url 'Zangief' %}"><li><img src="../../static/app/images/iconA16.png" alt="ZANGIEF"></li></a>
+    <a href="{% url 'Lily' %}"><li><img src="../../static/app/images/iconA17.png" alt="LILY"></li></a>
+    <a href="{% url 'Cammy' %}"><li><img src="../../static/app/images/iconA18.png" alt="CAMMY"></li></a>
+    <a href="{% url 'Rashid' %}"><li><img src="../../static/app/images/iconA19.png" alt="RASHID"></li></a>
+    <a href="{% url 'Aki' %}"><li><img src="../../static/app/images/iconA20.png" alt="AKI"></li></a>
+    <a href="{% url 'Ed' %}"><li><img src="../../static/app/images/iconA21.png" alt="ED"></li></a>
+    <a href="{% url 'Gouki' %}"><li><img src="../../static/app/images/iconA22.png" alt="GOUKI"></li></a>
+    <a href="{% url 'Vega' %}"><li><img src="../../static/app/images/iconA23aJ.png" alt="VEGA"></li></a>
+    <a href="{% url 'Terry' %}"><li><img src="../../static/app/images/iconA24.png" alt="TERRY"></li></a>
+  </ul>
+</div>
+
+{% endblock %}
