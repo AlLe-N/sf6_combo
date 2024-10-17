@@ -3,14 +3,8 @@
 <div class="character-content">
   <h2 class="character-content-title">Akiのコンボ一覧</h2>
   <hr />
-    {% for post in posts %}
-    <article>
-      <h2 class="subtitle">{{post.title}}</h2>
-      <small>Posted at {{post.posted_date}}</small>
-      <p>{{post.intro}}</p>
-      <a href="{% url 'post_detail' post.slug %}">詳しく見る</a>
-      <hr />
-    </article>
+    {% for combo in combos %}
+    <li>{{ combo.name }} - {{ combo.input_sequence }}</li>
     {% endfor %}
 </div>
 
