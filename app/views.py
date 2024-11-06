@@ -16,4 +16,4 @@ def character_detail(request, name):
     characters = Character.objects.all()
     character = get_object_or_404(Character, name=name)
     combos = Combo.objects.filter(character=character)
-    return render(request, f'app/Character-Page/{name}.html', {'characters': characters,'character': character, 'combos': combos})
+    return render(request, "app/character_detail.html", {'characters': characters,'character': character, 'combos': combos})
