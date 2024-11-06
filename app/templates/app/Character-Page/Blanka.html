@@ -1,17 +1,30 @@
 {% extends "app/base.html" %} {% block content %}
 
 <div class="character-content">
-  <h2 class="character-content-title">Blankaのコンボ一覧</h2>
+  <div class="character-content-title">
+  <h2>{{ character.get_name_display }}のコンボ一覧</h2>
+  <img src="{{ character.image.url }}" alt="{{ character.get_name_display }}">
+  </div>
   <hr />
-    <!-- {% for post in posts %}
-    <article>
-      <h2 class="subtitle">{{post.title}}</h2>
-      <small>Posted at {{post.posted_date}}</small>
-      <p>{{post.intro}}</p>
-      <a href="{% url 'post_detail' post.slug %}">詳しく見る</a>
-      <hr />
-    </article>
-    {% endfor %} -->
+
+  <p>{{ character.description }}</p>
+  
+  <h2>コンボリスト</h2>
+  <ul>
+      {% for combo in combos %}
+          <li>
+              <h3>{{ combo.title }}</h3>
+              <p>{{ combo.description }}</p>
+              <p>操作タイプ: {{ combo.input_type }}</p>
+              <p>難易度: {{ combo.difficulty }}</p>
+              <p>ダメージ: {{ combo.damage }}</p>
+              <p>起き攻め: {{ combo.okizeme|yesno:"有り,無し" }}</p>
+              {% if combo.video %}
+                  <a href="{{ combo.video }}">動画リンク</a>
+              {% endif %}
+          </li>
+      {% endfor %}
+  </ul>
 </div>
 
 <div id="character-select">
