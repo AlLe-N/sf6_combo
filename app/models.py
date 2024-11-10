@@ -47,9 +47,11 @@ class Combo(models.Model):
     title = models.CharField(max_length=100)  # コンボのタイトル
     description = models.TextField()  # コンボの内容
     input_type = models.CharField(max_length=50, choices=[('modern', 'Modern'), ('classic', 'Classic')],default='classic')  # 操作タイプ
-    difficulty = models.PositiveSmallIntegerField(default=1)  # 難易度（1-10などのスケールで設定可能）
+    difficulty = models.CharField(max_length=6, choices=[('easy', 'Easy'), ('medium', 'Medium'),('hard','Hard')],default='easy')  # 難易度
     damage = models.PositiveIntegerField(default=0)  # ダメージ数
     okizeme = models.BooleanField(default=False)  # 起き攻めの有無
+    situation = models.TextField(blank=True, null=True)  # 起き攻めの状況説明
+    frames = models.PositiveIntegerField(blank=True, null=True)  # フレーム数（オプション）
     video = models.FileField(upload_to='videos/', blank=True, null=True)  # 動画ファイル用のフィールド
 
     def __str__(self):

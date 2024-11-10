@@ -3,7 +3,7 @@
 <div class="character-content">
     <div class="character-content-title">
     <h2>{{ character.get_name_display }}のコンボ一覧</h2>
-    <img src="{{ character.image.url }}" alt="{{ character.get_name_display }}">
+    <!-- <img src="{{ character.image.url }}" alt="{{ character.get_name_display }}"> -->
     </div>
     <hr />
 
@@ -12,18 +12,32 @@
     <h2>コンボリスト</h2>
     <ul>
         {% for combo in combos %}
-            <li>
-                <h3>{{ combo.title }}</h3>
-                <p>{{ combo.description }}</p>
-                <p>操作タイプ: {{ combo.input_type }}</p>
-                <p>難易度: {{ combo.difficulty }}</p>
-                <p>ダメージ: {{ combo.damage }}</p>
-                <p>起き攻め: {{ combo.okizeme|yesno:"有り,無し" }}</p>
-                {% if combo.video %}
-                    <a href="{{ combo.video }}">動画リンク</a>
-                {% endif %}
-            </li>
-        {% endfor %}
+        <li>
+            <!-- コンボのタイトルのみ表示し、クリックで詳細を展開 -->
+            <details>
+                <summary>{{ combo.title }}</summary>
+                <div>
+                    <p>{{ combo.description }}</p>
+                    <p>操作タイプ: {{ combo.input_type }}</p>
+                    <p>難易度: {{ combo.difficulty }}</p>
+                    <p>ダメージ: {{ combo.damage }}</p>
+                    <p>起き攻め: {{ combo.okizeme|yesno:"有り,無し" }}</p>
+
+                    {% if combo.okizeme %}
+                        <p>状況: {{ combo.situation }}</p>
+                        <p>フレーム数: {{ combo.frames }}フレーム</p>
+                    {% endif %}
+
+                    {% if combo.video %}
+                        <video width="320" height="240" controls>
+                            <source src="{{ combo.video.url }}" type="video/mp4">
+                            お使いのブラウザは動画の再生をサポートしていません。
+                        </video>
+                    {% endif %}
+                </div>
+            </details>
+        </li>
+    {% endfor %}
     </ul>
     </div>
 
