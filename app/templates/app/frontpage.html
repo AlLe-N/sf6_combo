@@ -21,11 +21,12 @@
 <div class="frontpage-content">
   <article>
     <h2>このサイトの説明</h2>
-    <p>ストリートファイター6で自分が使うコンボや連携、セットアップをまとめたサイトです。ご自由にご活用してください。このサイトにある連携を使って対戦に負けても、責任は取れませんのでお気を付けください。</p>
+    <p>ストリートファイター6で自分が使うコンボや連携、セットアップをまとめたサイトです。ご自由にご活用してください。</p>
   </article>
   <article>
     <h2>お知らせ</h2>
-
+    <p>〇月〇日サイト運営開始</p>
+    <p>〇月〇日サイト○○コンボ更新</p>
     {% for post in posts %}
 
       <h2 class="subtitle">{{post.title}}</h2>
@@ -41,8 +42,10 @@
 
 {% endblock %}
 
-<!-- .\venv\Scripts\activate -->
-<!-- cd project -->
-<!-- python manage.py runserver -->
-<!-- python manage.py makemigrations -->
-<!-- python manage.py migrate -->
+
+
+<!-- .\venv\Scripts\activate
+cd project
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate -->

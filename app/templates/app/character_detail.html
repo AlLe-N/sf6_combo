@@ -4,44 +4,73 @@
     <div class="character-content-title">
     <h2>{{ character.get_name_display }}のコンボ一覧</h2>
     <!-- <img src="{{ character.image.url }}" alt="{{ character.get_name_display }}"> -->
-    </div>
+</div>
+<hr />
+
+<form method="get">
+    <input type="text" name="search" placeholder="タイトルや内容で検索" value="{{ search_query|default:'' }}">
+    
+    <label for="difficulty">難易度:</label>
+    <select name="difficulty" id="difficulty">
+        <option value="">全て</option>
+        <option value="easy" {% if difficulty == 'easy' %}selected{% endif %}>初級</option>
+        <option value="medium" {% if difficulty == 'medium' %}selected{% endif %}>中級</option>
+        <option value="hard" {% if difficulty == 'hard' %}selected{% endif %}>上級</option>
+    </select>
+
+    <label for="input_type">操作タイプ:</label>
+    <select name="input_type" id="input_type">
+        <option value="">全て</option>
+        <option value="m" {% if input_type == 'm' %}selected{% endif %}>M</option>
+        <option value="c" {% if input_type == 'c' %}selected{% endif %}>C</option>
+        <option value="m & c" {% if input_type == 'm & c' %}selected{% endif %}>M & C</option>
+    </select>
+    <button type="submit">フィルター</button>
+    
+    <label for="okizeme">起き攻め:</label>
+    <select name="okizeme" id="okizeme">
+        <option value="">全て</option>
+        <option value="True" {% if okizeme == 'True' %}selected{% endif %}>有り</option>
+        <option value="False" {% if okizeme == 'False' %}selected{% endif %}>無し</option>
+    </select>
+    
+    <button type="submit">検索</button>
+</form>
+
+<hr />
+
+<p>{{ character.description }}</p>
+
+<h2>コンボリスト</h2>
+<hr />
+<ul>
+    {% for combo in combos %}
+    <li>
+        <h3>{{ combo.title }}</h3>
+        <p>難易度: {{ combo.get_difficulty_display }} / 操作タイプ: {{ combo.get_input_type_display }} / 起き攻め: {{ combo.okizeme|yesno:"有り,無し" }} / ダメージ: {{ combo.damage }}</p>
+        <details>
+            <summary>詳細</summary>
+            <div class="combo-detail-content">
+                <p>{{ combo.description }}</p>
+                <p>コンボ後状況: {{ combo.situation|linebreaksbr }}</p>
+
+                {% if combo.video %}
+                    <video width="320" height="240" controls>
+                        <source src="{{ combo.video.url }}" type="video/mp4">
+                        お使いのブラウザは動画の再生をサポートしていません。
+                    </video>
+                {% endif %}
+            </div>
+        </details>
+    </li>
     <hr />
+    {% empty %}
+    <p>該当するコンボがありません。</p>
+{% endfor %}
+</ul>
+</div>
 
-    <p>{{ character.description }}</p>
-
-    <h2>コンボリスト</h2>
-    <ul>
-        {% for combo in combos %}
-        <li>
-            <!-- コンボのタイトルのみ表示し、クリックで詳細を展開 -->
-            <details>
-                <summary>{{ combo.title }}</summary>
-                <div>
-                    <p>{{ combo.description }}</p>
-                    <p>操作タイプ: {{ combo.input_type }}</p>
-                    <p>難易度: {{ combo.difficulty }}</p>
-                    <p>ダメージ: {{ combo.damage }}</p>
-                    <p>起き攻め: {{ combo.okizeme|yesno:"有り,無し" }}</p>
-
-                    {% if combo.okizeme %}
-                        <p>状況: {{ combo.situation }}</p>
-                        <p>フレーム数: {{ combo.frames }}フレーム</p>
-                    {% endif %}
-
-                    {% if combo.video %}
-                        <video width="320" height="240" controls>
-                            <source src="{{ combo.video.url }}" type="video/mp4">
-                            お使いのブラウザは動画の再生をサポートしていません。
-                        </video>
-                    {% endif %}
-                </div>
-            </details>
-        </li>
-    {% endfor %}
-    </ul>
-    </div>
-
-    <div id="character-select">
+<div id="character-select">
     <h2>CHARACTER SELECT</h2>
     <ul class="character-list">
         {% for character in characters %}

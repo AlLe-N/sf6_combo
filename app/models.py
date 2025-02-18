@@ -25,6 +25,7 @@ CHARACTER_CHOICES = [
     ('kimbery', 'Kimbery'),
     ('lily', 'Lily'),
     ('luke', 'Luke'),
+    ('mai', 'Mai'),
     ('manon', 'Manon'),
     ('marisa', 'Marisa'),
     ('rashid', 'Rashid'),
@@ -46,8 +47,8 @@ class Combo(models.Model):
     character = models.ForeignKey(Character, on_delete=models.CASCADE)  # キャラクターとの紐づけ
     title = models.CharField(max_length=100)  # コンボのタイトル
     description = models.TextField()  # コンボの内容
-    input_type = models.CharField(max_length=50, choices=[('modern', 'Modern'), ('classic', 'Classic')],default='classic')  # 操作タイプ
-    difficulty = models.CharField(max_length=6, choices=[('easy', 'Easy'), ('medium', 'Medium'),('hard','Hard')],default='easy')  # 難易度
+    input_type = models.CharField(max_length=50, choices=[('m', 'M'), ('c', 'C'), ('m & c', 'M & C')],default='m & c')  # 操作タイプ
+    difficulty = models.CharField(max_length=6, choices=[('easy', '初級'), ('medium', '中級'),('hard','上級')],default='初級')  # 難易度
     damage = models.PositiveIntegerField(default=0)  # ダメージ数
     okizeme = models.BooleanField(default=False)  # 起き攻めの有無
     situation = models.TextField(blank=True, null=True)  # 起き攻めの状況説明
