@@ -11,6 +11,6 @@ class CharacterAdmin(admin.ModelAdmin):
 
 @admin.register(Combo)
 class ComboAdmin(admin.ModelAdmin):
-    list_display = ('title', 'character', 'difficulty', 'damage', 'okizeme')
-    list_filter = ('character', 'difficulty', 'okizeme')
+    list_display = ('title', 'character', 'damage')
+    list_filter = ('character', 'difficulty')
     search_fields = ('title', 'description')

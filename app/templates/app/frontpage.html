@@ -25,16 +25,12 @@
   </article>
   <article>
     <h2>お知らせ</h2>
-    <p>〇月〇日サイト運営開始</p>
-    <p>〇月〇日サイト○○コンボ更新</p>
+    <hr />
     {% for post in posts %}
-
-      <h2 class="subtitle">{{post.title}}</h2>
+      <h3 class="subtitle">{{post.title}}</h3>
       <small>Posted at {{post.posted_date}}</small>
-      <p>{{post.intro}}</p>
-      <a href="{% url 'post_detail' post.slug %}">詳しく見る</a>
+      <p>{{post.body}}</p>
       <hr />
-
     {% endfor %}
 
   </article>

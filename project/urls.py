@@ -17,13 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from app.views import frontpage, post_detail,character_detail
+from app.views import frontpage, character_detail
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",frontpage,name="frontpage"),
-    path("<slug>/", post_detail, name="post_detail"),
-    path('characters/<str:name>/', character_detail, name='character_detail')
+    path('characters/<str:name>/', character_detail, name='character_detail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

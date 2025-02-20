@@ -18,36 +18,47 @@
             <h2>{{ character.get_name_display }}のコンボ一覧</h2>
             <hr />
             <form method="get">
-                <input type="text" name="search" placeholder="タイトルや内容で検索" value="{{ search_query|default:'' }}">
+                <div class="filter-form">
+                    <label for="difficulty">難易度:</label>
+                    <select name="difficulty" id="difficulty">
+                        <option value="">全て</option>
+                        <option value="easy" {% if difficulty == 'easy' %}selected{% endif %}>初級</option>
+                        <option value="medium" {% if difficulty == 'medium' %}selected{% endif %}>中級</option>
+                        <option value="hard" {% if difficulty == 'hard' %}selected{% endif %}>上級</option>
+                    </select>
                 
-                <label for="difficulty">難易度:</label>
-                <select name="difficulty" id="difficulty">
-                    <option value="">全て</option>
-                    <option value="easy" {% if difficulty == 'easy' %}selected{% endif %}>初級</option>
-                    <option value="medium" {% if difficulty == 'medium' %}selected{% endif %}>中級</option>
-                    <option value="hard" {% if difficulty == 'hard' %}selected{% endif %}>上級</option>
-                </select>
-            
-                <label for="input_type">操作タイプ:</label>
-                <select name="input_type" id="input_type">
-                    <option value="">全て</option>
-                    <option value="m" {% if input_type == 'm' %}selected{% endif %}>M</option>
-                    <option value="c" {% if input_type == 'c' %}selected{% endif %}>C</option>
-                    <option value="m & c" {% if input_type == 'm & c' %}selected{% endif %}>M & C</option>
-                </select>
-                
-                <label for="okizeme">起き攻め:</label>
-                <select name="okizeme" id="okizeme">
-                    <option value="">全て</option>
-                    <option value="True" {% if okizeme == 'True' %}selected{% endif %}>有り</option>
-                    <option value="False" {% if okizeme == 'False' %}selected{% endif %}>無し</option>
-                </select>
-                
-                <button type="submit">検索</button>
+                    <label for="input_type">操作タイプ:</label>
+                    <select name="input_type" id="input_type">
+                        <option value="">全て</option>
+                        <option value="m" {% if input_type == 'm' %}selected{% endif %}>M</option>
+                        <option value="c" {% if input_type == 'c' %}selected{% endif %}>C</option>
+                        <option value="m & c" {% if input_type == 'm & c' %}selected{% endif %}>M & C</option>
+                    </select>
+                    
+                    <label for="okizeme">起き攻め:</label>
+                    <select name="okizeme" id="okizeme">
+                        <option value="">全て</option>
+                        <option value="True" {% if okizeme == 'True' %}selected{% endif %}>有り</option>
+                        <option value="False" {% if okizeme == 'False' %}selected{% endif %}>無し</option>
+                    </select>
+    
+                    <label for="okizeme">ヒット状況:</label>
+                    <select name="hit_situation" id="hit_situation">
+                        <option value="">全て</option>
+                        <option value="normal" {% if hit_situation == 'normal' %}selected{% endif %}>通常</option>
+                        <option value="counter" {% if hit_situation == 'counter' %}selected{% endif %}>カウンター</option>
+                        <option value="punish" {% if hit_situation == 'punish' %}selected{% endif %}>パニカン</option>
+                    </select>
+                    <button type="submit" class="filter-button">フィルター</button>
+                    <a href="{{ request.path }}" class="reset-button">リセット</a>
+                </div>
+                <div class="search-form">
+                    <input type="text" name="search" placeholder="タイトルや内容で検索" value="{{ search_query|default:'' }}">
+                    <button type="submit" class="search-button">検索</button>
+                </div>
             </form>
         </div>
     
-        <hr />
         <h2>コンボリスト</h2>
         <hr />
     
@@ -55,13 +66,14 @@
             {% for combo in combos %}
             <li>
                 <h3>{{ combo.title }}</h3>
-                <p>難易度: {{ combo.get_difficulty_display }} / 操作タイプ: {{ combo.get_input_type_display }} / 起き攻め: {{ combo.okizeme|yesno:"有り,無し" }} / ダメージ: {{ combo.damage }}</p>
+                <p>難易度: {{ combo.get_difficulty_display }} / 起き攻め: {{ combo.okizeme|yesno:"有り,無し" }} / ダメージ: {{ combo.damage }} / 操作タイプ: {{ combo.get_input_type_display }}</p>
                 <details>
                     <summary>詳細</summary>
                     <div class="combo-detail-content">
                         <p>{{ combo.description }}</p>
-                        <p>コンボ後状況: {{ combo.situation|linebreaksbr }}</p>
-    
+                        {% if combo.situation %}
+                            <p>コンボ後状況: {{ combo.situation|linebreaksbr }}</p>
+                        {% endif %}
                         {% if combo.video %}
                             <video width="320" height="240" controls>
                                 <source src="{{ combo.video.url }}" type="video/mp4">
@@ -76,6 +88,47 @@
             <p>該当するコンボがありません。</p>
         {% endfor %}
         </ul>
+        <!-- ページネーションのリンク -->
+        <div class="pagination">
+            {% if combos.paginator.num_pages > 1 %}
+            <nav>
+                <ul class="pagination">
+                    <!-- 前へボタン -->
+                    {% if combos.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">&laquo;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ combos.previous_page_number }}">‹</a>
+                        </li>
+                    {% endif %}
+
+                    <!-- ページ番号 -->
+                    {% for num in combos.paginator.page_range %}
+                        {% if num == combos.number %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <!-- 次へボタン -->
+                    {% if combos.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ combos.next_page_number }}">›</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ combos.paginator.num_pages }}">&raquo;</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+{% endif %}
+        </div>
     </div>
 </div>
 
