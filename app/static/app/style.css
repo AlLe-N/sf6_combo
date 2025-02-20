@@ -170,7 +170,7 @@ font-weight: normal;
 
 /* CHARACTER_DETAIL */
 .character-content {
-  padding: 50px 30px;
+  padding: 50px 0px;
 }
 
 .character-content-title {
@@ -178,9 +178,12 @@ font-weight: normal;
 }
 
 .character-content-text {
-  padding: 30px 15px;
+  padding: 30px 30px;
+  margin: 0 auto;
+  border: 2px solid;
+  border-radius: 15px;
 }
-.label {
+/* .label {
   display: inline-block;
   padding: 0px 4px;
   font-weight: bold;
@@ -200,19 +203,48 @@ font-weight: normal;
 .od {
   color: #d4c400;
   border-color: #d4c400;
+} */
+
+.combo-list {
+  padding: 0px 40px;
 }
 
 .character-search {
   
 }
 
-.character-content img{
-  display: block;
-  /* width: 80px;
-  height: 80px; */
+.character-content-title img{
+  padding: 0 auto;
 }
 
 .combo-detail-content video{
   display: flex;
   justify-content: center;
+}
+
+
+@media screen and (max-width: 800px) {
+	/* 800px以下に適用されるCSS */
+  .character-content-title {
+    padding: 0 40px 20px;
+  }
+
+  .character-content-title {
+    display: block;
+    text-align: center;
+  }
+  .character-content-text {
+  width: 500px;
+  text-align: left;
+  padding: 30px 50px;
+  margin: 0 auto 30px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+	/* 580px以下に適用されるCSS（スマホ用） */
+  .character-content-text {
+    width: auto;
+    padding: 30px 20px;
+    }
 }
