@@ -1,11 +1,8 @@
-# 仮想環境を無視
 ../venv/
-
-# Pythonのコンパイル済みファイルを無視
 *.pyc
 __pycache__/
-
-# Djangoプロジェクトに関連する不要なファイルを無視
 *.log
 *.pot
 db.sqlite3
+.DS_Store
+.env
