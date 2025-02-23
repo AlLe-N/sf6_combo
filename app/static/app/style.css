@@ -1,6 +1,7 @@
 @charset "utf-8";
 html {
   font-size: 100%;
+  scroll-padding-top: 40px;
 }
 body {
   font-size: 0.9rem;
