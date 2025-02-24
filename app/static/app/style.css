@@ -1,9 +1,4 @@
 @charset "utf-8";
-@font-face {
-  font-family: 'CityBrawlersBoldCaps';
-  src: url("{% static 'app/fonts/CityBrawlersBoldCaps.otf' %}") format('opentype');
-}
-
 html {
   font-size: 100%;
   scroll-padding-top: 40px;
