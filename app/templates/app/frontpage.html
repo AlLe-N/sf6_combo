@@ -1,5 +1,4 @@
-{% extends "app/base.html" %} {% block content %}
-
+{% extends "app/base.html" %} {% block content %} {% load static %}
 
 <div id="main-visual">
   <h1 class="main-title">SF6 Combo</h1>
@@ -8,10 +7,10 @@
 <div id="character-select">
   <h2>CHARACTER SELECT</h2>
     <ul class="character-list">
-      {% for character in characters %}
-          <a href="{% url 'character_detail' character.name %}">
+      {% for key, name in character_choices %}
+          <a href="{% url 'character_detail' character_name=key %}">
               <li>
-                  <img src="{{ character.image.url }}" alt="{{ character.get_name_display }}">
+                  <img src="{% static 'app/images/' %}{{ key }}.png" alt="{{ name }}">
               </li>
           </a>
       {% endfor %}

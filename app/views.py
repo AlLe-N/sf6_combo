@@ -1,17 +1,36 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Combo, Character
+from .models import Post, Combo, CHARACTER_CHOICES, Character
 from django.db.models import Q
 from django.core.paginator import Paginator
 
+CHARACTER_DETAILS = {
+    "ryu": {"description": "リュウは波動拳・昇龍拳・竜巻旋風脚を持つオールラウンダー"},
+    "ken": {"description": "ケンは攻撃的なスタイルで豪快なコンボが得意"},
+    "juri": {"description": "ジュリは風破ストックシステムを持ち、多彩な蹴り技で攻める"},
+    "blanka": {
+            "description": 
+            """電気：214P 
+            バチカ：2溜め8K
+            ロリ：4溜め6P
+            エアロリ：空中4溜め6P
+            バクロリ：63214K
+            人形設置：22P
+            コマ投げ：236P
+            リフト：2PP+P
+            レイドジャンプ：2PP+K
+            サプフォ：KKK"""
+            },
+    }
+
 def frontpage(request):
     posts = Post.objects.all()
-    characters = Character.objects.all()
-    return render(request, "app/frontpage.html", {"posts": posts, "characters": characters})
+    character_choices = CHARACTER_CHOICES
+    return render(request, "app/frontpage.html", {"posts": posts, 'character_choices': character_choices})
 
-def character_detail(request, name):
-    characters = Character.objects.all()
-    character = get_object_or_404(Character, name=name)
-
+def character_detail(request, character_name):
+    character = character_name
+    character_choices = CHARACTER_CHOICES
+    character_info = CHARACTER_DETAILS.get(character_name, {"description": "このキャラクターの詳細は準備中です。"})
     # フィルターおよび検索パラメータを取得
     difficulty = request.GET.get('difficulty')
     okizeme = request.GET.get('okizeme')
@@ -41,14 +60,15 @@ def character_detail(request, name):
     if search_query:
         combos = combos.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
 
-    # ページネーション設定（1ページに10件表示）
+    # ページネーション設定
     paginator = Paginator(combos, 10)
-    page_number = request.GET.get('page')  # `?page=2` などの値を取得
+    page_number = request.GET.get('page')
     combos = paginator.get_page(page_number)
 
     return render(request, "app/character_detail.html", {
-        'characters': characters,
+        'character_choices': character_choices,
         'character': character, 
+        'character_info': character_info,
         'combos': combos,
         "difficulty": difficulty,
         "okizeme": okizeme,

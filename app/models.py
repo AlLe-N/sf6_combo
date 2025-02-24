@@ -6,43 +6,45 @@ class Post(models.Model):
     posted_date = models.DateTimeField(auto_now_add = True)
 
 CHARACTER_CHOICES = [
-    ('aki', 'Aki'),
-    ('blanka', 'Blanka'),
-    ('cammy', 'Cammy'),
-    ('chunli', 'Chunli'),
-    ('dhalsim', 'Dhalsim'),
-    ('dj', 'Dj'),
-    ('ed', 'Ed'),
-    ('gouki', 'Gouki'),
-    ('guile', 'Guile'),
-    ('honda', 'Honda'),
+    ('ryu', 'Ryu'),
+    ('luke', 'Luke'),
     ('jamie', 'Jamie'),
-    ('jp', 'Jp'),
+    ('chunli', 'Chunli'),
+    ('guile', 'Guile'),
+    ('kimbery', 'Kimbery'),
     ('juri', 'Juri'),
     ('ken', 'Ken'),
-    ('kimbery', 'Kimbery'),
-    ('lily', 'Lily'),
-    ('luke', 'Luke'),
-    ('mai', 'Mai'),
+    ('blanka', 'Blanka'),
+    ('dhalsim', 'Dhalsim'),
+    ('honda', 'Honda'),
+    ('deejay', 'Deejay'),
     ('manon', 'Manon'),
     ('marisa', 'Marisa'),
+    ('jp', 'Jp'),
+    ('zangief', 'Zangief'),
+    ('lily', 'Lily'),
+    ('cammy', 'Cammy'),
     ('rashid', 'Rashid'),
-    ('ryu', 'Ryu'),
-    ('terry', 'Terry'),
+    ('aki', 'Aki'),
+    ('ed', 'Ed'),
+    ('gouki', 'Gouki'),
     ('vega', 'Vega'),
-    ('zangief', 'Zangief')
+    ('terry', 'Terry'),
+    ('mai', 'Mai')
 ]
 
-class Character(models.Model):
-    name = models.CharField(max_length=50, choices=CHARACTER_CHOICES)  # 選択式のフィールド
-    description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='characters/', blank=True)
+class Character:
+    """キャラクターを定義"""
+    def __init__(self, key):
+        self.key = key
+        self.name = dict(CHARACTER_CHOICES).get(key, key.capitalize())
 
-    def __str__(self):
-        return self.get_name_display()  # フルネームを返す
+    def get_image_url(self):
+            """キャラクターの画像URLを返す"""
+            return f"/static/app/images/{self.name.lower()}.png"
 
 class Combo(models.Model):
-    character = models.ForeignKey(Character, on_delete=models.CASCADE)  # キャラクターとの紐づけ
+    character = models.CharField(max_length=20, choices=CHARACTER_CHOICES)  # キャラクターとの紐づけ
     title = models.CharField(max_length=100)  # コンボのタイトル
     description = models.TextField()  # コンボの内容
     input_type = models.CharField(max_length=10, choices=[('m', 'M'), ('c', 'C'), ('m & c', 'M & C')],default='m & c')  # 操作タイプ
@@ -56,4 +58,4 @@ class Combo(models.Model):
     video = models.FileField(upload_to='videos/', blank=True, null=True)  # 動画ファイル用のフィールド
 
     def __str__(self):
-        return f"{self.title} - {self.character.name}"
+        return f"{self.title} - {self.character}"

@@ -24,5 +24,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",frontpage,name="frontpage"),
-    path('characters/<str:name>/', character_detail, name='character_detail'),
+    path('<str:character_name>/', character_detail, name='character_detail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

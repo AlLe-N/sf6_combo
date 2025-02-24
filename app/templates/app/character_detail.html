@@ -1,21 +1,21 @@
-{% extends "app/base.html" %} {% block content %}
+{% extends "app/base.html" %} {% block content %} {% load static %}
 
 <div class="character-content">
     <div class="character-content-title">
-        <img src="{{ character.image.url }}" alt="{{ character.get_name_display }}">
+        <img src="{% static 'app/images/' %}{{ character }}.png" alt="{{ character }}">
             <div class="character-content-text">
                 <h2>全キャラ共通のコンボの表記方法</h2>
                 <p><span class="label dr">DR</span> : ドライブラッシュ</p>
                 <p><span class="label cr">CR</span> : キャンセルドライブラッシュ</p>
                 <p><span class="label od">OD</span> : オーバードライブ技</p>
                 <h2>キャラ特有のコンボの表記方法</h2>
-                <p>{{ character.description|linebreaksbr }}</p>
+                <p>{{ character_info.description|linebreaks }}</p>
             </div>
     </div>
 
     <div class = "combo-list">
         <div class="character-search">
-            <h2>{{ character.get_name_display }}のコンボ一覧</h2>
+            <h2>{{ character|upper }}のコンボ一覧</h2>
             <hr />
             <form method="get">
                 <div class="filter-form">
@@ -135,10 +135,10 @@
 <div id="character-select">
     <h2>CHARACTER SELECT</h2>
     <ul class="character-list">
-        {% for character in characters %}
-            <a href="{% url 'character_detail' character.name %}">
+        {% for key, name in character_choices %}
+            <a href="{% url 'character_detail' character_name=key %}">
                 <li>
-                    <img src="{{ character.image.url }}" alt="{{ character.get_name_display }}">
+                    <img src="{% static 'app/images/' %}{{ key }}.png" alt="{{ name }}">
                 </li>
             </a>
         {% endfor %}
