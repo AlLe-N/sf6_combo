@@ -8,6 +8,7 @@
                 <p><span class="label dr">DR</span> : ドライブラッシュ</p>
                 <p><span class="label cr">CR</span> : キャンセルドライブラッシュ</p>
                 <p><span class="label od">OD</span> : オーバードライブ技</p>
+                <br>
                 <h2>キャラ特有のコンボの表記方法</h2>
                 <p>{{ character_info.description|linebreaks }}</p>
             </div>
@@ -49,8 +50,8 @@
                         <option value="counter" {% if hit_situation == 'counter' %}selected{% endif %}>カウンター</option>
                         <option value="punish" {% if hit_situation == 'punish' %}selected{% endif %}>パニカン</option>
                     </select>
-                    <button type="submit" class="filter-button">フィルター</button>
-                    <a href="{{ request.path }}" class="reset-button">リセット</a>
+                    <button type="submit" class="filter-button">フィルター設定</button>
+                    <!-- <a href="{{ request.path }}" class="reset-button">リセット</a> -->
                 </div>
                 <div class="search-form">
                     <input type="text" name="search" placeholder="タイトルや内容で検索" value="{{ search_query|default:'' }}">

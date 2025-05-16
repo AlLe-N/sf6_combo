@@ -51,7 +51,7 @@ main {
   text-align: right;
 }
 #header li{
-  padding: 0 10px;
+  padding: 10px 10px;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -269,8 +269,9 @@ font-weight: normal;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  float: right;
 }
-.reset-button {
+/* .reset-button {
   display: inline-block;
   background-color: #dc3545;
   color: white;
@@ -280,7 +281,7 @@ font-weight: normal;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
-}
+} */
 .reset-button:hover {
   opacity: 0.8;
 }
@@ -362,5 +363,9 @@ font-weight: normal;
   .character-content-text {
     width: auto;
     padding: 30px 20px;
+    }
+  .character-content-title img{
+    width: 80%;
+    margin-bottom: 20px;
     }
 }
