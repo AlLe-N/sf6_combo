@@ -4,9 +4,14 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 
 CHARACTER_DETAILS = {
-    "ryu": {"description": "リュウは波動拳・昇龍拳・竜巻旋風脚を持つオールラウンダー"},
-    "ken": {"description": "ケンは攻撃的なスタイルで豪快なコンボが得意"},
-    "juri": {"description": "ジュリは風破ストックシステムを持ち、多彩な蹴り技で攻める"},
+    "ryu": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "luke": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "jamie": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "chunli": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "guile": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "kimbery": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "juri": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "ken": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
     "blanka": {
             "description": "\n".join([
             "電気：214P",
@@ -21,7 +26,25 @@ CHARACTER_DETAILS = {
             "レイドジャンプ：2PP > K"
         ])
             },
+    "dhalsim": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "honda": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "deejay": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "manon": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "marisa": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "jp": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "zangief": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "lily": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "cammy": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "rashid": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "aki": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "ed": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "gouki": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "vega": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "terry": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "mai": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
     }
+
+
 
 def frontpage(request):
     posts = Post.objects.all()
