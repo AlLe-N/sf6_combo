@@ -30,7 +30,9 @@ CHARACTER_CHOICES = [
     ('gouki', 'Gouki'),
     ('vega', 'Vega'),
     ('terry', 'Terry'),
-    ('mai', 'Mai')
+    ('mai', 'Mai'),
+    ('elena','Elena'),
+    ('sagat','Sagat')
 ]
 
 class Character:

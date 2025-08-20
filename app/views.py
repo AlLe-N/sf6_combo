@@ -42,6 +42,8 @@ CHARACTER_DETAILS = {
     "vega": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
     "terry": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
     "mai": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "elena": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"},
+    "sagat": {"description": "今後コンボ追加時に記入予定(現在ブランカのみ記入済み)"}
     }
 
 
